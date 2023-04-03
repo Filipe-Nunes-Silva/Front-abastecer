@@ -15,6 +15,7 @@ import DataGridUsers from '../pages/Users/DataGrid';
 import NewUser from '../pages/Users/New';
 import EditUser from '../pages/Users/Edit';
 import ViewUser from '../pages/Users/View';
+import InitialUser from '../pages/InitalUser';
 
 
 
@@ -35,6 +36,7 @@ const RouterHandle = () => {
             <Route path='/users/edit' element={<VerifyAuth> <EditUser /> </VerifyAuth>} />
             <Route path='/users/view/:id' element={<VerifyAuth><ViewUser /></VerifyAuth>} />
             <Route path='/acess' element={<SignIn />} />
+            <Route path='/initialuser' element={<InitialUser />} />
         </Routes>
     );
 };
