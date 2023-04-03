@@ -22,7 +22,6 @@ export default function SignIn() {
     const [error, setError] = useState(false);
     const [msgError, setMsgError] = useState({});
     const [msgSucess, setMsgSucess] = useState('');
-
     const [open, setOpen] = useState(true);
 
     const handleSubmit = async () => {
@@ -34,7 +33,7 @@ export default function SignIn() {
             return;
         };
         if (password.length == 0) {
-            const err = { password: 'Preencha o campo e-mail !' };
+            const err = { password: 'Preencha o campo senha !' };
             setMsgError(err);
             setError(true);
             return;
@@ -42,7 +41,8 @@ export default function SignIn() {
 
         const json = await api.signIn(cpf, password);
         if (json.errors) {
-            setMsgError({ msg: json.errors[0].msg })
+            setMsgError({ msg: json.errors[0].msg });
+            return;
         };
         const token = json.data.token;
         loggedIn(token);
@@ -86,16 +86,24 @@ export default function SignIn() {
         navigate('/');
     };
 
+
+
     useEffect(() => {
         if (error) {
             setError(false);
         };
-    }, [cpf]);
+    }, [password, cpf])
     useEffect(() => {
-        if (error) {
-            setError(false);
+        const token = loggedIn();
+        if (token) {
+            dispatch({
+                type: 'CHANGE_LOGED',
+                payload: {
+                    isLogged: true,
+                },
+            });
         };
-    }, [password])
+    }, []);
 
     return (
         <>

@@ -24,7 +24,7 @@ const DELETE = async (endPoint, body) => {
     }
     catch (error) {
         if (error.response.data.notallowed) {
-            window.location.href = '/auth';
+            window.location.href = '/acess';
             return;
         }
         else {
@@ -40,7 +40,7 @@ const PUT = async (endPoint, body) => {
     }
     catch (error) {
         if (error.response.data.notallowed) {
-            window.location.href = '/auth';
+            window.location.href = '/acess';
             return;
         }
         else {
@@ -58,7 +58,7 @@ const POST = async (endPoint, body) => {
     catch (error) {
 
         if (error.response.data.notallowed) {
-            window.location.href = '/auth';
+            window.location.href = '/acess';
             return;
         }
         else {
@@ -75,11 +75,10 @@ const GET = async (endPoint, params) => {
     }
     catch (error) {
         if (error.response.data.notallowed) {
-            window.location.href = '/auth';
+            window.location.href = '/acess';
             return;
         }
         else {
-            // return { erros: error.response.data.erros };
             return { errors: error.response.data.errors };
         };
     };
@@ -90,16 +89,73 @@ export const api = {
         const json = await POST('/access', { cpf, password });
         return json;
     },
+    newVehicle: async (data) => {
+        const json = await POST('/vehicle', data);
+        return json;
+    },
+
     getVehicles: async () => {
         const json = await GET('/vehicle');
         return json;
     },
-    getFueling: async () => {
+    getVehicle: async (id) => {
+        const json = await GET(`/vehicle/${id}`);
+        return json;
+    },
+    editVehicle: async (id, data) => {
+        const json = await PUT(`/vehicle/${id}`, data);
+        return json;
+    },
+    deleteVehicle: async (id) => {
+        const json = await DELETE(`/vehicle/${id}`);
+        return json;
+    },
+    newFueling: async (data) => {
+        const json = await POST('/fueling', data);
+        return json;
+    },
+    getFuelings: async () => {
         const json = await GET('/fueling');
+        return json;
+    },
+    getFueling: async (id) => {
+        const json = await GET(`/fueling/${id}`);
+        return json;
+    },
+    editFueling: async (id, data) => {
+        const json = await PUT(`/fueling/${id}`, data);
+        return json;
+    },
+    deleteFueling: async (id) => {
+        const json = await DELETE(`/fueling/${id}`);
+        return json;
+    },
+    newUser: async (data) => {
+        const json = await POST('/user', data);
         return json;
     },
     getUsers: async () => {
         const json = await GET('/user');
+        return json;
+    },
+    getUser: async (id) => {
+        const json = await GET(`/user/${id}`);
+        return json;
+    },
+    editUser: async (data) => {
+        const json = await PUT(`/user`, data);
+        return json;
+    },
+    getIdUser: async () => {
+        const json = await GET('/user/getid');
+        return json;
+    },
+    deleteUser: async () => {
+        const json = await DELETE(`/user`);
+        return json;
+    },
+    initialUser: async (data) => {
+        const json = await POST('/initialuser', data);
         return json;
     },
 };

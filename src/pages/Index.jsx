@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { publicApi } from '../services/api';
+import { publicApi, api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 export default function Index() {
@@ -22,7 +22,6 @@ export default function Index() {
     const goToUsers = () => {
         navigate('/users');
     };
-
 
     return (
         <>
@@ -111,12 +110,6 @@ export default function Index() {
 
                 </Grid>
             </Box>
-
-
-
-
-
-
         </>
     );
 }
